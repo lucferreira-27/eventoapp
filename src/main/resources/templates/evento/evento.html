@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaft.orog"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Compiled and minified JavaScript -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<meta charset="ISO-8859-1">
+<title>Cadastrar Evento</title>
+</head>
+<body>
+
+
+
+	<header>
+		<nav class="grey">
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">EventoApp</a>
+				<ul id="nav-mobile" class="left hide-on-med-and-down">
+					<li><a href="/cadastrarEvento"
+						class="waves-effect waves-light btn">Novo Evento</a></li>
+				</ul>
+				<ul id="nav-mobile" class="left hide-on-med-and-down">
+					<li><a href="/eventos"
+						class="waves-effect waves-light btn">Mostrar Eventos</a></li>
+				</ul>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href="/sair" class="waves-effect waves-light btn">Sair</a></li>
+				</ul>
+
+			</div>
+		</nav>
+
+	</header>
+
+
+	<h3 class="container" th:text="${eventoEscolhido.nome}"></h3>
+
+
+	<table class="container">
+		<thead>
+			<tr>
+				<th>Local</th>
+				<th>Data</th>
+				<th>Horario</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr>
+				<td><span th:text="${eventoEscolhido.local}"></span></td>
+
+				<td><span th:text="${eventoEscolhido.data}"></span></td>
+
+				<td><span th:text="${eventoEscolhido.horario}"></span></td>
+			</tr>
+		</tbody>
+
+		<thead th:if="${!eventoEscolhido.convidados.empty}">
+			<tr>
+				<th>Nome</th>
+				<th>RG</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr th:each="convidado : ${eventoEscolhido.convidados}">
+				<td><span th:text="${convidado.nome}"></span></td>
+
+				<td><span th:text="${convidado.rg}"></span></td>
+								<td><a th:href="@{/convidado/deletar/{id}(id=${convidado.id})}"
+						class="waves-effect waves-light btn">Deletar<i class="material-icons right">delete</i></a></td>
+			</tr>
+		</tbody>
+	</table>
+	<form method="post" th:action="${eventoEscolhido.id}" class="container">
+		<h4>Adicionar Convidado</h4>
+
+		<div class="input-field col s6">
+			<input type="text" value="" class="validate" name="nome"
+				placeholder="Ex: Lucas Ferreira" />
+
+		</div>
+		<div class="row">
+			<div class="input-field col s3">
+				<input type="text" value="" name="rg" class="validate"
+					placeholder="Ex: 602412-51" />
+			</div>
+		</div>
+		<button type="submit" class="waves-effect waves-light btn">Adicionar</button>
+	</form>
+
+</body>
+</html>

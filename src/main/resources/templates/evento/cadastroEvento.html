@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaft.orog"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+<!-- Compiled and minified JavaScript -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<meta charset="ISO-8859-1">
+<title>Cadastrar Evento</title>
+</head>
+<body>
+
+
+	<header>
+		<nav class="grey">
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">EventoApp</a>
+				<ul id="nav-mobile" class="left hide-on-med-and-down">
+					<li><a href="/cadastrarEvento"
+						class="waves-effect waves-light btn">Novo Evento</a></li>
+				</ul>
+				<ul id="nav-mobile" class="left hide-on-med-and-down">
+					<li><a href="/eventos"
+						class="waves-effect waves-light btn">Mostrar Eventos</a></li>
+				</ul>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href="/sair" class="waves-effect waves-light btn">Sair</a></li>
+				</ul>
+
+			</div>
+		</nav>
+
+	</header>
+
+	<h3 class = "container">Cadastro de Eventos</h1>
+
+		
+	<div th:if="${validation == true}" class = "container">
+		
+		<p>Evento cadastrado com sucesso! </p> 
+	
+	</div>
+		
+	<form method="post" class="container" th:object="${evento}">
+		<div class="input-field col s6">
+			<input type="text" value="" name="nome"
+				placeholder="Ex: Lucas Ferreira" />
+							<span class="helper-text" data-error="wrong" data-success="right" style="color: red"
+					th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+		</div>
+		<div class="row">
+
+
+			<div class="input-field col s3">
+				<input type="text" name="local" placeholder="Ex: Sao Paulo" />
+				<span style="color: red" class="helper-text" data-error="wrong" data-success="right"
+					th:if="${#fields.hasErrors('local')}" th:errors="*{local}"></span>
+
+
+			</div>
+			<div class="input-field col s3">
+				<input type="date" name="data" placeholder="Ex: 01/01/2021" /> <span
+					style="color: red" class="helper-text" data-error="wrong" data-success="right"
+					th:if="${#fields.hasErrors('data')}" th:errors="*{data}"></span>
+
+			</div>
+			<div class="input-field col s3">
+				<input type="time" name="horario" placeholder="Ex: 20:00, 09:00 etc" />
+				<span class="helper-text" data-error="wrong" data-success="right"
+					style="color: red" th:if="${#fields.hasErrors('horario')}" th:errors="*{horario}"></span>
+
+
+			</div>
+		</div>
+		<button type="submit" class="waves-effect waves-light btn">Salvar</button>
+	</form>
+</body>
+</html>

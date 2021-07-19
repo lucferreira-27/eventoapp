@@ -1,0 +1,72 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<!-- Compiled and minified JavaScript -->
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<title>index</title>
+</head>
+<body>
+
+	<header>
+		<nav class="grey">
+			<div class="nav-wrapper">
+				<a href="#" class="brand-logo center">EventoApp</a>
+				<ul id="nav-mobile" class="left hide-on-med-and-down">
+					<li><a href="/cadastrarEvento"
+						class="waves-effect waves-light btn">Novo Evento</a></li>
+				</ul>
+				<ul id="nav-mobile" class="left hide-on-med-and-down">
+					<li><a href="/eventos"
+						class="waves-effect waves-light btn">Mostrar Eventos</a></li>
+				</ul>
+				<ul id="nav-mobile" class="right hide-on-med-and-down">
+					<li><a href="/sair" class="waves-effect waves-light btn">Sair</a></li>
+				</ul>
+
+			</div>
+		</nav>
+
+	</header>
+
+
+	<h3 class = "container">Todos Eventos</h3>
+
+	<table class="container">
+		<thead>
+			<tr>
+				<th>Nome</th>
+				<th>Local</th>
+				<th>Data</th>
+				<th>Horario</th>
+				<th>Deletar</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr th:each="evento : ${eventos}">
+
+				<td><a th:href="${evento.id}"> <span
+						th:text="${evento.nome}"></span>
+				</a></td>
+				<td><span th:text="${evento.local}"></span></td>
+
+				<td><span th:text="${evento.data}"></span></td>
+
+				<td><span th:text="${evento.horario}"></span></td>
+
+				<td><a th:href="@{/evento/deletar/{id}(id=${evento.id})}"
+						class="waves-effect waves-light btn">Deletar<i class="material-icons right">delete</i></a></td>
+		</tbody>
+	</table>
+
+
+
+</body>
+</html>
