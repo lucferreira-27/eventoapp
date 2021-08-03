@@ -3,10 +3,9 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="style.css">
 <!-- Compiled and minified JavaScript -->
 <script
 	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
@@ -15,23 +14,7 @@
 <body>
 
 	<header>
-		<nav class="grey">
-			<div class="nav-wrapper">
-				<a href="#" class="brand-logo center">EventoApp</a>
-				<ul id="nav-mobile" class="left hide-on-med-and-down">
-					<li><a href="/cadastrarEvento"
-						class="waves-effect waves-light btn">Novo Evento</a></li>
-				</ul>
-				<ul id="nav-mobile" class="left hide-on-med-and-down">
-					<li><a href="/eventos"
-						class="waves-effect waves-light btn">Mostrar Eventos</a></li>
-				</ul>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="/sair" class="waves-effect waves-light btn">Sair</a></li>
-				</ul>
-
-			</div>
-		</nav>
+	<div th:replace="fragments/topnav.html :: navbar-default-blue"></div>
 
 	</header>
 

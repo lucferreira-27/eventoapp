@@ -1,98 +1,138 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeleaft.orog"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head>
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<html xmlns:th="http://thymeleaft.orog" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 
-<!-- Compiled and minified JavaScript -->
-<script
-	src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<meta charset="ISO-8859-1">
-<title>Cadastrar Evento</title>
+<head>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/style.css}">
+	<script type="text/javascript" th:src="@{/js/script.js}"></script>
+
+	<!-- Compiled and minified JavaScript -->
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+	<meta charset="ISO-8859-1">
+	<title>Cadastrar Evento</title>
 </head>
+
 <body>
 
 
 
 	<header>
-		<nav class="grey">
-			<div class="nav-wrapper">
-				<a href="#" class="brand-logo center">EventoApp</a>
-				<ul id="nav-mobile" class="left hide-on-med-and-down">
-					<li><a href="/cadastrarEvento"
-						class="waves-effect waves-light btn">Novo Evento</a></li>
-				</ul>
-				<ul id="nav-mobile" class="left hide-on-med-and-down">
-					<li><a href="/eventos"
-						class="waves-effect waves-light btn">Mostrar Eventos</a></li>
-				</ul>
-				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="/sair" class="waves-effect waves-light btn">Sair</a></li>
-				</ul>
+		<div th:replace="fragments/topnav.html :: navbar-default-blue"></div>
 
-			</div>
-		</nav>
 
 	</header>
 
 
-	<h3 class="container" th:text="${eventoEscolhido.nome}"></h3>
 
+	<div class="formCard container">
+		<form method="post" th:action="${eventoEscolhido.id}">
+			<div class="row">
+				<div class="col s12 m6 col s12 m6  offset-l6">
+					<div class="card light-blue darken-3">
+						<div class="card-content white-text">
+							<span class="card-title">Adicionar Convidado</span>
+							<div class="input-field col s6">
+								<input type="text" value="" class="validate" name="nome"
+									placeholder="Ex: Lucas Ferreira" />
 
-	<table class="container">
-		<thead>
-			<tr>
-				<th>Local</th>
-				<th>Data</th>
-				<th>Horario</th>
-			</tr>
-		</thead>
-		<tbody>
+							</div>
+							<div class="row">
+								<div class="input-field col s3">
+									<input type="text" value="" name="rg" class="validate"
+										placeholder="Ex: 602412-51" />
+								</div>
+							</div>
 
-			<tr>
-				<td><span th:text="${eventoEscolhido.local}"></span></td>
+						</div>
+						<div class="card-action">
+							<button type="submit" class="waves-effect waves-light btn">Adicionar</button>
+							<button type="button" class="waves-effect waves-light btn"
+								onclick="hideCardAddEvent()">Fechar</button>
 
-				<td><span th:text="${eventoEscolhido.data}"></span></td>
-
-				<td><span th:text="${eventoEscolhido.horario}"></span></td>
-			</tr>
-		</tbody>
-
-		<thead th:if="${!eventoEscolhido.convidados.empty}">
-			<tr>
-				<th>Nome</th>
-				<th>RG</th>
-			</tr>
-		</thead>
-		<tbody>
-
-			<tr th:each="convidado : ${eventoEscolhido.convidados}">
-				<td><span th:text="${convidado.nome}"></span></td>
-
-				<td><span th:text="${convidado.rg}"></span></td>
-								<td><a th:href="@{/convidado/deletar/{id}(id=${convidado.id})}"
-						class="waves-effect waves-light btn">Deletar<i class="material-icons right">delete</i></a></td>
-			</tr>
-		</tbody>
-	</table>
-	<form method="post" th:action="${eventoEscolhido.id}" class="container">
-		<h4>Adicionar Convidado</h4>
-
-		<div class="input-field col s6">
-			<input type="text" value="" class="validate" name="nome"
-				placeholder="Ex: Lucas Ferreira" />
-
-		</div>
-		<div class="row">
-			<div class="input-field col s3">
-				<input type="text" value="" name="rg" class="validate"
-					placeholder="Ex: 602412-51" />
+						</div>
+					</div>
+				</div>
 			</div>
-		</div>
-		<button type="submit" class="waves-effect waves-light btn">Adicionar</button>
-	</form>
+		</form>
+	</div>
 
+
+	<div class="evento container">
+		<h3 class="center-align" th:text="${eventoEscolhido.nome}"></h3>
+
+
+		<div class="container col s12">
+
+			<div class="divider"></div>
+			<div class="row">
+
+				<div class="card">
+					<div class="card-image">
+						<img th:src="@{/images/default-image.jpg}" class="responsive-img">
+						<span class="card-title" th:text="${eventoEscolhido.nome}"></span>
+					</div>
+					<div class="card-content">
+						<table class="container">
+							<thead>
+								<tr>
+									<th>Local</th>
+									<th>Data</th>
+									<th>Horario</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><span th:text="${eventoEscolhido.local}"></span></td>
+
+									<td><span th:text="${eventoEscolhido.data}"></span></td>
+
+									<td><span th:text="${eventoEscolhido.horario}"></span></td>
+								</tr>
+							</tbody>
+						</table>
+
+					</div>
+					<div class="card-action">
+						<a class="waves-effect waves-light btn" onclick="javascript:void(0);">Mostrar Convidados</a>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		<div class="container">
+
+			<div class="col s6">
+				<button class="waves-effect waves-light btn" onclick="showCardAddEvent()">Adicionar
+					Convidado</button>
+			</div>
+
+			<table class="centered col s6">
+
+				<thead th:if="${!eventoEscolhido.convidados.empty}">
+					<tr>
+						<th>Nome</th>
+						<th>RG</th>
+						<th>Excluir</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="convidado : ${eventoEscolhido.convidados}">
+						<td><span th:text="${convidado.nome}"></span></td>
+
+						<td><span th:text="${convidado.rg}"></span></td>
+						<td><a th:href="@{/convidado/deletar/{id}(id=${convidado.id})}"
+								class="waves-effect waves-light btn">Deletar<i
+									class="material-icons right">delete</i></a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+
+		</div>
+	</div>
 </body>
+
 </html>
